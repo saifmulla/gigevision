@@ -9,7 +9,7 @@ ExternalProject_Add(googletest
     TEST_COMMAND    ""
     INSTALL_COMMAND ""
     PATCH_COMMAND ""
-    STEP_TARGET googletest
+    # STEP_TARGET googletest
 )
 
 ExternalProject_Get_property(googletest SOURCE_DIR)
@@ -32,14 +32,16 @@ add_test(NAME test_gtest COMMAND test_gtest)
 
 # test for applesockets
 add_executable(test_applesockets ${CMAKE_SOURCE_DIR}/tests/test_applesockets.cpp)
-target_include_directories(test_applesockets 
-    PUBLIC 
-        ${CMAKE_SOURCE_DIR}/include
-        $<TARGET_PROPERTY:gtest::gtest,INTERFACE_INCLUDE_DIRECTORIES>
-    )
 target_link_libraries(test_applesockets 
     PUBLIC 
     ${PROJECT_NAME}
     $<TARGET_PROPERTY:gtest::gtest,IMPORTED_LOCATION>
 )
+
+target_include_directories(test_applesockets 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/include
+        $<TARGET_PROPERTY:gtest::gtest,INTERFACE_INCLUDE_DIRECTORIES>
+    )
+
 add_test(NAME test_applesockets COMMAND test_applesockets)

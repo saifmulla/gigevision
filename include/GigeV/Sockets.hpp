@@ -5,12 +5,12 @@
 
 namespace gigev {
 
-class ISockets {
+class Sockets {
 
 public:
   virtual bool InitSocketAPI() = 0;
   virtual bool CloseSocketAPI() = 0;
-  virtual int GetSocketError() = 0;
+  virtual int GetSocketError(int sock) = 0;
 
   // IP stack and network card
   virtual int GetMaxNetworkInterfaces(void) = 0;
